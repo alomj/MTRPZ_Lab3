@@ -1,6 +1,5 @@
-from fastapi import APIRouter
-
 import numpy as np
+from fastapi import APIRouter
 
 router = APIRouter()
 
@@ -10,6 +9,7 @@ def hello_world() -> dict:
     return {'msg': 'Hello, World!'}
 
 
+@router.get('/multiply-matrix')
 def multiply_matrix() -> dict:
     first_matrix = np.random.randint(low=0, high=10, size=(10, 10))
     second_matrix = np.random.randint(low=0, high=10, size=(10, 10))
