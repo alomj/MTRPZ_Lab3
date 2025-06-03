@@ -17,13 +17,13 @@ Docker leverages layer caching. As a result significantly reducing the container
 
 
 -Dockerfile breaks layer caching by copying all files (COPY . .) before installing dependencies.
-As a result, even small code changes re-trigger pip install.
+As a result, even small code changes re-trigger `pip install`.
 
 -*Building Time*: (48.9s -> 52.5s) | *Image Size* : 990mb
 
 ### 4. Using a smaller base image (`python:3.11-alpine`)
 
-Switching to the python:3.11-alpine base image significantly improved both build time and image size.
+Switching to the `python:3.11-alpine` base image significantly improved both build time and image size.
 Alpine is a minimal Linux distribution that provides a much smaller base footprint compared to Debian-based images.
 
 Smaller base image: `python:3.11-alpine` is ~50MB compared to ~900MB for `python:3.11-buster`.
@@ -32,3 +32,14 @@ Smaller base image: `python:3.11-alpine` is ~50MB compared to ~900MB for `python
 *Building Time*: (48,9s  -> 17.9s) |
 *Image Size* : 990mb -> 98.5 mb
 
+### 5. After add `numpy` methods for multiplying matrices
+
+The increase in build time and image size is specifically caused by the addition of the `numpy` library.
+`numpy` introduces heavy compiled dependencies that are not present in the minimal base image. Since `numpy` relies on 
+compiled C and Fortran extensions, which require several heavy system dependencies to be installed in Alpine.
+In summary, the size increase is not from `numpy` alone, but from the system-level build tools and libraries required to 
+compile it in an Alpine environment.
+
+
+*Building Time*: (17.9s  -> 27.0s) |
+*Image Size* : 98.5 -> 293 mb
