@@ -54,5 +54,17 @@ Additionally, installing numpy on Debian may process slower and heavier due to `
 metadata and documentation
 
 
-*Building Time*: (27.0s -> 54.9s) |
+*Building Time* : (27.0s -> 54.9s) |
 *Image Size* : 293 mb -> 1.16 gb
+
+
+## Go
+
+1. Base Dockerfile
+
+When we check our directory, we can see that there are some files that are not included in the Dockerfile, such as:
+`templates`, `README.rst`, `cmd`, `fizzbuzz`, `go.sum`, `go.mod` `main.go`
+
+*Building Time* 47.3s : 
+*Image Size* 899 mb : 
+
