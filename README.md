@@ -42,4 +42,17 @@ compile it in an Alpine environment.
 
 
 *Building Time*: (17.9s  -> 27.0s) |
-*Image Size* : 98.5 -> 293 mb
+*Image Size* : 98.5mb -> 293 mb
+
+### 6. Measure with debian-based image `python:3.11-bullseye`
+
+Switching from the Alpine-based image to the Debian-based image resulted in a significant increase in both build time
+and image size. Debian-based images come with a much larger base footprint compared to Alpine.
+While Alpine is built for minimalism and uses lightweight `musl` C library, Debian uses the more feature-rich
+(but heavier) glibc, and includes many additional tools and libraries coming out-of-the-box.
+Additionally, installing numpy on Debian may process slower and heavier due to `apt` package manager which install more
+metadata and documentation
+
+
+*Building Time*: (27.0s -> 54.9s) |
+*Image Size* : 293 mb -> 1.16 gb
