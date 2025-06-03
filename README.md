@@ -20,3 +20,15 @@ Docker leverages layer caching. As a result significantly reducing the container
 As a result, even small code changes re-trigger pip install.
 
 -*Building Time*: (48.9s -> 52.5s) | *Image Size* : 990mb
+
+### 4. Using a smaller base image (`python:3.11-alpine`)
+
+Switching to the python:3.11-alpine base image significantly improved both build time and image size.
+Alpine is a minimal Linux distribution that provides a much smaller base footprint compared to Debian-based images.
+
+Smaller base image: `python:3.11-alpine` is ~50MB compared to ~900MB for `python:3.11-buster`.
+
+
+*Building Time*: (48,9s  -> 17.9s) |
+*Image Size* : 990mb -> 98.5 mb
+
