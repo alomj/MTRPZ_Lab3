@@ -102,5 +102,16 @@ To ensure data consistency and persistence, we mounted a volume in the docker-co
       - mongodb_data:/data/db
 ```
 
+For Nodejs container:
+*Building Time*:  13.6s |
+*Image Size*:  1.17 gb
+
+### 2. Refactor Dockerfile
+
+We optimized the Dockerfile by switching from the default node:18 image to the much lighter node:18-alpine base image
+and by using a multi-stage build. This significantly reduced the final image size
+
+*Building Time*:  19s |
+*Image Size*:  148mb
 
 
