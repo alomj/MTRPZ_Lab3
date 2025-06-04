@@ -65,8 +65,8 @@ metadata and documentation
 When we check our directory, we can see that there are some files that are not included in the Dockerfile, such as:
 `templates`, `README.rst`, `cmd`, `fizzbuzz`, `go.sum`, `go.mod` `main.go`
 
-*Building Time* 47.3s : 
-*Image Size* 899 mb : 
+*Building Time*: 47.3s |
+*Image Size*: 899 mb 
 
 
 ### 2. Add multi-stage build 
@@ -76,5 +76,16 @@ final minimal runtime environment. This approach copies only the final compiled 
 unnecessary files and dependencies. However, because `scratch` image is completely empty ( no package manager, no shell)
 It is not convenient for running commands or debugging inside the container.
 
-*Building Time*: 45.5s  
-*Image Size*:  10.2 mb 
+*Building Time*: 45.5s  |
+*Image Size*: 10.2 mb 
+
+### 3. Using distroless 
+
+Distroless images are still minimal and secure but include essential runtime components such as certificate authorities
+and minimal system libraries. This allows the application to run HTTPS or TLS connections out of the box
+    
+*Building Time*: 47.2s  |
+*Image Size*: 12 mb 
+
+
+
