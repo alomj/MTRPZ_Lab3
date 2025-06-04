@@ -60,7 +60,7 @@ metadata and documentation
 
 ## Go
 
-1. Base Dockerfile
+### 1. Base Dockerfile
 
 When we check our directory, we can see that there are some files that are not included in the Dockerfile, such as:
 `templates`, `README.rst`, `cmd`, `fizzbuzz`, `go.sum`, `go.mod` `main.go`
@@ -68,3 +68,13 @@ When we check our directory, we can see that there are some files that are not i
 *Building Time* 47.3s : 
 *Image Size* 899 mb : 
 
+
+### 2. Add multi-stage build 
+
+We introduced a multi-stage build using the `golang:1.22` image to compile the application and the scratch image as the
+final minimal runtime environment. This approach copies only the final compiled binary into the final image, excluding 
+unnecessary files and dependencies. However, because `scratch` image is completely empty ( no package manager, no shell)
+It is not convenient for running commands or debugging inside the container.
+
+*Building Time*: 47.3s  
+*Image Size*:  10.2 mb 
