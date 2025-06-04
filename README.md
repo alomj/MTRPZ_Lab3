@@ -115,3 +115,36 @@ and by using a multi-stage build. This significantly reduced the final image siz
 *Image Size*:  148mb
 
 
+### Conclusion
+
+The containerization experiment with `Python`, `Go`, and `Node.js` reveals key insights:
+
+- `Python`:  
+  - `python:3.11-alpine` reduced image size from `990MB` → `98.5MB` and build time from `48.9s` → `17.9s`.  
+  - Adding `numpy` increased size to `293MB` and time to `27.0s`.  
+  - Switching to Debian-based `bullseye` pushed size to `1.16GB` and time to `54.9s`.  
+  - Poor file copying (`COPY . .` too early) broke caching and slowed builds.
+
+- `Go`:  
+  - Multi-stage build with `scratch` reduced image size from `899MB` → `10.2MB` (build time `45.5s`).  
+  - Using `distroless` gave a more practical secure runtime with an image size of `12MB`.
+
+- `Node.js`:  
+  - Switching to `node:18-alpine` with multi-stage build dropped size from `1.17GB` → `148MB`.  
+  - Build time slightly increased from `13.6s` → `19s`.
+
+    
+
+### Challenges & Explanations
+
+- **Layer caching**: Incorrect Dockerfile structure (e.g., copying files before installing dependencies) caused unnecessary re-installation, increasing build time.
+- **Numpy in Alpine**: Required compilation of heavy native dependencies (C/Fortran), which inflated image size and required build tools.
+- **Scratch base**: While minimal and secure, it lacks shell/debugging tools — inconvenient for debugging or interactive container use.
+- **Distroless**: More secure and includes essential runtime libraries (e.g., CA certificates), but also harder to debug.
+- **Database services** (e.g., MongoDB): Even when app images are optimized, container stacks can still be heavy due to DB layers.
+
+
+**Best Practices**:  
+Use `Alpine`, `scratch`, or `distroless` with multi-stage builds for minimal size and enhanced security.  
+However, always balance image size, security, and debugging needs, especially when dealing with heavy dependencies  
+or external services
