@@ -87,5 +87,20 @@ and minimal system libraries. This allows the application to run HTTPS or TLS co
 *Building Time*: 47.2s  |
 *Image Size*: 12 mb 
 
+## Node.js
+
+### 1. Initial docker-compose 
+
+include 2 services:
+-node.js (app)
+-mongo.db (mongodb)
+
+To ensure data consistency and persistence, we mounted a volume in the docker-compose.yml file:
+
+```
+    volumes:
+      - mongodb_data:/data/db
+```
+
 
 
