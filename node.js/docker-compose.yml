@@ -4,15 +4,13 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile.slim
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
       - MONGO_URI=mongodb://mongodb:27017/tododb
     depends_on:
       - mongodb
-    volumes:
-      - ./:/app
     networks:
       - todo-network
 
