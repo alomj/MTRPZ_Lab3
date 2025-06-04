@@ -76,5 +76,5 @@ final minimal runtime environment. This approach copies only the final compiled 
 unnecessary files and dependencies. However, because `scratch` image is completely empty ( no package manager, no shell)
 It is not convenient for running commands or debugging inside the container.
 
-*Building Time*: 47.3s  
+*Building Time*: 45.5s  
 *Image Size*:  10.2 mb 
